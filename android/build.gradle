@@ -1,0 +1,23 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    plugins {
+        id 'com.android.application' version '8.1.0' // Perbarui ke versi AGP terbaru
+        id 'org.jetbrains.kotlin.android' version '1.8.10' // Perbarui Kotlin ke versi terbaru
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
